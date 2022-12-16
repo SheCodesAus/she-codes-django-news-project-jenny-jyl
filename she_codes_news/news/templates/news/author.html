@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>{{ story.author }}</h2>>
+<div id>
+    <h4>List of Articles</h4>
+    {% if latest_stories %}
+        {% for story in all_stories %}
+            {% include story.title %}
+    {% else %}
+        <p>
+            No articles published yet.
+        </p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 id="profile_details">Profile Details</h2>
+<h3 id="username">
+    {{user.username}}
+</h3>
+<button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
+
+<div id = article_list>
+    <h4>List of Articles</h4>
+    {% if NewsStory.author == user.username %}
+        {% for story in article_list %}
+            <!-- <p>{{ story.title }}</p> -->
+            <p>hi</p>
+        {% endfor %}
+    {% else %}
+        <p>
+            No articles published yet.
+        </p>
+    {% endif %}
+</div>
+
+{% endblock %}
+
