@@ -2,6 +2,9 @@ from django.views import generic
 from django.urls import reverse_lazy
 from .models import NewsStory
 from .forms import StoryForm
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class IndexView(generic.ListView):
     template_name = 'news/index.html'
@@ -33,8 +36,14 @@ class AddStoryView(generic.CreateView):
 
 class AuthorView(generic.DetailView):
     template_name = 'news/author.html'
-    model = NewsStory
-    context_object_name = 'author'
+    model = get_user_model()
+    context_object_name = 'author_list'
 
-
+    # def get_queryset(self):
+    #     return NewsStory.objects.all()
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['author_stories'] = NewsStory.objects.filter(author='author')
+    #     return context
 

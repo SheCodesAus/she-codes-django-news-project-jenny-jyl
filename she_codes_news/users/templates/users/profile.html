@@ -1,4 +1,8 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
+{% block stylesheets %}
+    <link rel = "stylesheet" type="text/css" href="{% static 'users/styles.css' %}"/>
+{% endblock %}
 
 {% block content %}
 <h2 id="profile_details">Profile Details</h2>
@@ -7,19 +11,14 @@
 </h3>
 <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
 
-<div id = article_list>
-    <h4>List of Articles</h4>
-    {% if NewsStory.author == user.username %}
-        {% for story in article_list %}
-            <!-- <p>{{ story.title }}</p> -->
-            <p>hi</p>
+<div id="profile_view">
+    {% if profile_details %}
+        {% for story in profile_details.newsstory_set.all %}
+            {% include "news/storyCard.html" with story=story %}
         {% endfor %}
     {% else %}
-        <p>
-            No articles published yet.
-        </p>
+        <p>No stories available</p>
     {% endif %}
 </div>
 
 {% endblock %}
-

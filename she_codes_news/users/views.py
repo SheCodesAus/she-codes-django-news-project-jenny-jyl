@@ -7,6 +7,8 @@ from django.views import generic
 from .models import CustomUser
 from .forms import CustomUserCreationForm
 from django.views.generic import DetailView
+from django.contrib.auth import get_user_model
+from news.models import NewsStory
 
 class CreateAccountView(CreateView):
     form_class = CustomUserCreationForm
@@ -15,5 +17,15 @@ class CreateAccountView(CreateView):
 
 class ProfileView(generic.DetailView):
     template_name = 'users/profile.html'
-    model = CustomUser
+    model = get_user_model()
+    context_object_name = 'profile_details'
 
+    # def get_queryset(self):
+    #     return NewsStory.objects.filter(author=self.request.user)
+ 
+    # def get_queryset(self):
+    #     list = super().get_queryset()  
+    #     list = list.filter(author_id=self.kwargs['pk'])
+    #     return list
+
+   
