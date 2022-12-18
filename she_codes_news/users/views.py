@@ -9,6 +9,10 @@ from .forms import CustomUserCreationForm
 from django.views.generic import DetailView
 from django.contrib.auth import get_user_model
 from news.models import NewsStory
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+
+
 
 class CreateAccountView(CreateView):
     form_class = CustomUserCreationForm
@@ -19,6 +23,8 @@ class ProfileView(generic.DetailView):
     template_name = 'users/profile.html'
     model = get_user_model()
     context_object_name = 'profile_details'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
 
     # def get_queryset(self):
     #     return NewsStory.objects.filter(author=self.request.user)
@@ -28,4 +34,13 @@ class ProfileView(generic.DetailView):
     #     list = list.filter(author_id=self.kwargs['pk'])
     #     return list
 
+# @ login_required
+# def like_click(request, pk):
+#     story = get_object_or_404(NewsStory, pk=pk)
+#     if story.likedPost.filter(id=request.user.id).exists():
+#         story.likedPost.remove(request.user)
+#     else:
+#         story.likedPost.add(request.user)
+#     return redirect('news:story', pk=story.id)
    
+

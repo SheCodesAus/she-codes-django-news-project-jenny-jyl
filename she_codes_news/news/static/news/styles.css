@@ -84,3 +84,10 @@
     margin: 0 0 10px 10px;
     width: 50%;
 }
+
+#form-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

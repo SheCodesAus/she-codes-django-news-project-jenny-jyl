@@ -7,12 +7,16 @@
 
 {% block content %}
     <h2>Latest Doggo Tips</h2>
+    {% if request.user.is_authenticated %}
+        <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
+    {% else %}
+        <p></p>
+    {% endif %}
 
     <div id="latest-stories">
         {% if latest_stories %}
             {% for story in latest_stories %}
-            {% include "./storyCard.html" with story=story position=forloop.counter %}
-                <!-- <p>{{ story.title }}</p> -->
+                {% include "./storyCard.html" with story=story position=forloop.counter %}
             {% endfor %}
         {% else %}
             <p>No stories are available.</p>
@@ -21,20 +25,13 @@
 
     <h2>All Doggo Tips</h2>
     <div id="all-stories">
-        {% if latest_stories %}
+        {% if all_stories %}
             {% for story in all_stories %}
                 {% include "./storyCard.html" with story=story %}
-                <!-- <p>{{ story.title }}</p> -->
             {% endfor %}
         {% else %}
             <p>No stories are available.</p>
         {% endif %}
     </div>
-
-{% if request.user.is_authenticated %}
-    <button><a href="{% url 'news:newStory' %}">Write New Story</a></button>
-{% else %}
-    <p></p>
-{% endif %}
 
 {% endblock %}
