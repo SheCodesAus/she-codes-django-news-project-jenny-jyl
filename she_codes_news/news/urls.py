@@ -9,3 +9,5 @@ urlpatterns = [
     path('add-story/', views.AddStoryView.as_view(),name='newStory'),
     path('author/<int:pk>/', views.AuthorView.as_view(), name='author')
 ]
+
+
