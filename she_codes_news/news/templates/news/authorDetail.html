@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+    <link rel = "stylesheet" type="text/css" href="{% static 'news/styles.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<div id="author">
+  <h2>Information on {{ author.username }}:</h2>
+  <p>Date joined: {{ author.date_joined }}</p>
+</div>
+
+<h2>All Stories By {{ author.username }}:</h2>
+<div id="author_stories">
+    {% for story in author.stories.all %}
+        {% include './storyCard.html' with story=story %}
+    {% endfor %}
+</div>
+
+{% endblock %}

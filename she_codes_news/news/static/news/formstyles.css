@@ -1,0 +1,23 @@
+form#story-form {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+#dog-logo {
+    max-width: 10em;
+    max-height: 10em;
+    border-radius: 50%;
+    display: flex;
+    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid gray;
+}

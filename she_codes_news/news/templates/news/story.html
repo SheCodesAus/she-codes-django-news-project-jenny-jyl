@@ -1,8 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
 <div id="story-wrapper">
     <h2>{{ story.title }}</h2>
-    <h4>{{ story.author }}</h4>
+    <h4><a href = "{% url 'users:profile' story.author.id %}">By {{ story.author }}</a>
+        <br>
+        {% if story.author.id == user.id %}
+        <button><a class="edit-link" href="{% url 'news:editPost' story.id %}"> Edit</a></button>
+        <button><a class="delete-link" href="{% url 'news:deletePost' story.id %}">Delete</a></button>
+        {% endif %}
+    
+    {% if request.user.is_authenticated %}<a class="like-button" href="{% url 'news:like' story.id %}">
+        {% if request.user in story.favourited_by.all %}
+        <button>
+            ♥
+        </button>
+        {% else %}
+        <button>
+            ♡
+         </button>
+         {% endif %}
+    {% endif %}
+    {% if story.favourited_by.count %}
+        <p>Liked by: {{ story.favourited_by.count }} user{{ story.favourited_by.count|pluralize:"s" }} 
+        ({% for user in story.favourited_by.all %}{{user.username}} {% endfor %})</p>
+    {% endif %}
+    
     <div id="story-content">
-        <img src="{% static '/news/images/placeholder-5.jpg' %}">
+        <img src="{{story.image}}">
         {{ story.content|linebreaks }}
     </div>
 </div>
+
+{% endblock %}

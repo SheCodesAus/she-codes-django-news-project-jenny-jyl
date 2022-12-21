@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}     
+
+{% block stylesheets %}
+<link rel='stylesheet' type='text/css' href="{% static 'news/news.css' %}">
+{% endblock%}
+
+{% block content %}
+<h2>Delete Article</h2>
+{% if request.user.is_authenticated %}
+<h4>Are you sure you want to delete "{{ story.title }}"?</h4>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input class="delete-button" type="submit" value="Delete">
+    <button><a class="delete-button" href="{% url 'news:story' story.id %}">Cancel</a></button>
+</form>
+{% else %}
+    <h2>Please login to delete a story</h2>
+    <h4>To write an article, register here: <a href="{% url 'users:createAccount' %}">Register</a>
+{% endif %}
+{% endblock %}
