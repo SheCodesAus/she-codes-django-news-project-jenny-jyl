@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}       
+
+{% block stylesheets %}
+    <link rel='stylesheet' type='text/css' href="{% static 'news/formstyles.css' %}">
+{% endblock%}
+
+{% block content %}
+
+<div class="new-story">
+    <h2 id="form-heading">Post a new story</h2>
+    <img src="https://www.cdc.gov/healthypets/images/pets/cute-dog-headshot.jpg?_=42445" id="dog-logo">
+    <form action="" method="post" id="story-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+</div>
+{% endblock %}

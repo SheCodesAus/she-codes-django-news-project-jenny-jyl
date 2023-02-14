@@ -16,7 +16,7 @@
     grid-template-rows: 1fr 1fr 1fr;
     gap: 1px 1px;
     grid-template-areas: "left-1 right-1" "left-1 right-2" "left-1 right-3";
-    max-height: 500px;
+    max-height: 1000px;
 }
 
 #story-card-1 {
@@ -83,4 +83,15 @@
     float: right;
     margin: 0 0 10px 10px;
     width: 50%;
+}
+
+#form-heading {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form#story-form {
+    text-align: center
 }

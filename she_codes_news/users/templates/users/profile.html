@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{% static 'news/news.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2> {{ user.username }} </h2>
+
+<div id="profile-details">
+    <h4>Account Details:</h4>
+    <p>Username: {{ user.username }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Last login: {{ user.last_login }}</p>
+    <p>Date joined: {{ user.date_joined }}</p>
+</div>
+
+<div id="fav-posts">
+    <h4 class="story-section-label"> Favourite Stories </h4>
+    <div id="latest-stories">
+    <ul>
+        {% for story in object.favourites.all %}
+        <li>
+            <a href="{% url 'news:story' story.id %}">
+                '{{ story.title }}' by {{ story.author }}</a>
+        </li>    
+    {% endfor %}
+    </ul>
+</div>
+
+<h4>Posted Stories:</h4>
+<div id="posted-stories">
+    <ul>
+    {% for story in profile_details.stories.all %}
+    <li>
+        <a href="{% url 'news:story' story.id %}">
+            '{{ story.title }}' by {{ story.author }}</a>
+    </li>  
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
+
